@@ -15,7 +15,7 @@
 
 ## Links:
 * [Build Video](https://youtu.be/Fw4YdQWvs6I)
-* [SW Setup & Config Video]()
+* [SW Setup & Config Video](https://youtu.be/r6JIZEq3aTU)
 * [Config Tool](https://lbre.de/BREmote/struct.html)
 * [Serial Terminal](https://lbre.de/BREmote/sertest.html)
 * [Expo Tool](https://lbre.de/BREmote/expo.html)
