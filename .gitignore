@@ -4,3 +4,12 @@
 /Electronics/openfoil
 /Releases
 /Inofficial
+
+# MAC
+.DS_Store
+
+# vscode
+.vscode/*
+
+# IDEA
+.idea/*

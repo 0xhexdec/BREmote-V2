@@ -193,13 +193,9 @@ void checkStartupButtons()
     }
     else if (tog_input == -1)
     {
-      //USB Mode
-      Serial.println("USB Mode, type '?' for info...");
-      while(1)
-      {
-        scroll3Digits(LET_U, 5, LET_B, 200);
-        checkSerial();
-      }
+      //BLE Mode
+      Serial.println("Entering BLE Mode");
+      handleBLE();
     }
   }
   else

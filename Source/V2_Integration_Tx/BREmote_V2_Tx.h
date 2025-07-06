@@ -14,6 +14,10 @@
 #include "FS.h"
 #include "SPIFFS.h"
 #include "mbedtls/base64.h"
+// BLE
+#include <BLEDevice.h>
+#include <BLEUtils.h>
+#include <BLEServer.h>
 
 #define SW_VERSION 1
 const char* CONF_FILE_PATH = "/data.txt";
@@ -194,6 +198,10 @@ volatile bool exitChargeScreen = 0;
 #define P_HALL_TOG  1
 #define P_UBAT_MEAS 3 
 #define P_CHGSTAT   2
+
+// BLE Values
+#define TRANSMITTER_SERVICE_UUID                "de50d6f3-5593-48b7-8173-a10bc1d4a3aa"
+#define TRANSMITTER_CONFIG_CHARACTERISTIC_UUID  "bcbfc8b5-3b55-41ee-8085-75f3b42055dd"
 
 //Debug options
 //#define DEBUG_RX
