@@ -95,7 +95,10 @@ void calcFilter()
       //Until usrConf.tog_block_time reached, then unlock toggle
       else
       {
-        toggle_blocked_by_steer = 0;
+        if(usrConf.tog_block_time != 0)
+        {
+          toggle_blocked_by_steer = 0;
+        }
       }
     }
     else

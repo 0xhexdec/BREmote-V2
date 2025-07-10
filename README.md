@@ -103,13 +103,19 @@ Rx:
 </details>
 
 # Changelog:
+
+###2025-07-10:
+* Update Rx: Add ?printBat
+### 2025-07-08:
+* Update Tx: Add a case where 0 set as tog_block_time disables gearshifiting after initial throttle input
+* Fix Rx: Change PWM Pin from open-drain to push-pull 
 ### 2025-06-05:
-Updated Readme (Add YT link and conn examples)
+* Updated Readme (Add YT link and conn examples)
 ### 2025-05-26:
-Updated Complete.step (spring assy. missing)
-Added RF settings for US/AU(915MHz) in Tx&Rx
+* Updated Complete.step (spring assy. missing)
+* Added RF settings for US/AU(915MHz) in Tx&Rx
 ### 2025-05-20: [Release V2.1]
-Initial release
+* Initial release
 
 
 ---

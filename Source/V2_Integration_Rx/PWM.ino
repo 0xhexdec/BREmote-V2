@@ -93,7 +93,7 @@ void initRMT()
     .trans_queue_depth = 4,
   };
 
-  tx_chan_config.flags.io_od_mode = 1; //open-drain
+  tx_chan_config.flags.io_od_mode = 0; //open-drain
   // Create RMT TX channel
   ESP_ERROR_CHECK(rmt_new_tx_channel(&tx_chan_config, &tx_channel));
   // Create RMT encoder

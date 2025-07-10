@@ -197,6 +197,10 @@ void checkSerial()
       {
         serPrintGPS();
       }
+      else if(command == "?printBat")
+      {
+        serPrintBat();
+      }
       else if (command == "?") {
         // List all possible inputs
         Serial.println("Possible commands:");
@@ -206,6 +210,7 @@ void checkSerial()
         Serial.println("?clearSPIFFS - Clear usrConf from SPIFFS");
         Serial.println("?reboot - Reboot the remote");
         Serial.println("?printPWM - Print PWM values until sent 'quit'");
+        Serial.println("?printBat - Print analog Bat voltage until sent 'quit'");
         Serial.println("?printRSSI - Print RSSI and SNR values until sent 'quit'");
         Serial.println("?printTasks - Print task stack usage until sent 'quit'");
         Serial.println("?printGPS - Print GPS info");
@@ -223,6 +228,33 @@ void checkSerial()
 void serPrintGPS()
 {
   printSatelliteInfo();
+}
+
+void serPrintBat()
+{
+  while (true) 
+  {
+    if (Serial.available() > 0) {
+        String input = Serial.readStringUntil('\n'); // Read the input command
+        input.trim(); // Remove any whitespace or newline characters
+        
+        // If the received command matches the stop command, exit the loop
+        if (input.equals("quit")) {
+            Serial.println("Stopping print loop.");
+            break;
+        }
+    }
+
+    uint16_t raw = analogRead(P_UBAT_MEAS);
+    raw += analogRead(P_UBAT_MEAS);
+    raw += analogRead(P_UBAT_MEAS);
+
+    float vActual = (float)raw*usrConf.ubat_cal;
+
+    Serial.println(vActual);
+
+    vTaskDelay(pdMS_TO_TICKS(1000));
+  }
 }
 
 void serApplyConf()
