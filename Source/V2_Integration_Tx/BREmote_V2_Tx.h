@@ -14,10 +14,6 @@
 #include "FS.h"
 #include "SPIFFS.h"
 #include "mbedtls/base64.h"
-// BLE
-#include <BLEDevice.h>
-#include <BLEUtils.h>
-#include <BLEServer.h>
 
 #define SW_VERSION 1
 const char* CONF_FILE_PATH = "/data.txt";
@@ -199,10 +195,6 @@ volatile bool exitChargeScreen = 0;
 #define P_UBAT_MEAS 3 
 #define P_CHGSTAT   2
 
-// BLE Values
-#define TRANSMITTER_SERVICE_UUID                "de50d6f3-5593-48b7-8173-a10bc1d4a3aa"
-#define TRANSMITTER_CONFIG_CHARACTERISTIC_UUID  "bcbfc8b5-3b55-41ee-8085-75f3b42055dd"
-
 //Debug options
 //#define DEBUG_RX
 
@@ -234,9 +226,12 @@ volatile bool exitChargeScreen = 0;
 #define LOWER_CELSIUS 27
 #define TGT 28
 #define TLT 29
+#define LET_R 30
+#define BLE_1 31
+#define BLE_2 32
     
                     //0                 //1                 //2                 //3                 //4
-uint8_t num0[30][3]{ {0x1F, 0x11, 0x1F}, {0x00, 0x00, 0x1F}, {0x17, 0x15, 0x1D}, {0x11, 0x15, 0x1F}, {0x1C, 0x04, 0x1F},
+uint8_t num0[33][3]{ {0x1F, 0x11, 0x1F}, {0x00, 0x00, 0x1F}, {0x17, 0x15, 0x1D}, {0x11, 0x15, 0x1F}, {0x1C, 0x04, 0x1F},
                     //5                 //6                 //7                 //8                 //9
                     {0x1D, 0x15, 0x17}, {0x1F, 0x15, 0x17}, {0x10, 0x10, 0x1F}, {0x1F, 0x15, 0x1F}, {0x1D, 0x15, 0x1F},
                     //A                 //B                 //C                 //D                 //E                 //F
@@ -245,8 +240,10 @@ uint8_t num0[30][3]{ {0x1F, 0x11, 0x1F}, {0x00, 0x00, 0x1F}, {0x17, 0x15, 0x1D},
                     {0x1F, 0x04, 0x1F}, {0x11, 0x1F, 0x11}, {0x1F, 0x01, 0x01}, {0x1F, 0x14, 0x1C}, {0x10, 0x1F, 0x10},
                     //U                 //V                 //X                 //Y                 //Blank
                     {0x1F, 0x01, 0x1F}, {0x1E, 0x01, 0x1E}, {0x1B, 0x04, 0x1B}, {0x1C, 0x07, 0x1C}, {0x00, 0x00, 0x00},
-                    //Dash              //LOWER_CELSIUS     //TGT (>)           //TLT(<)
-                    {0x04, 0x04, 0x04}, {0x08, 0x07, 0x05}, {0x11, 0x0A, 0x04}, {0x04, 0x0A, 0x11}, 
+                    //Dash              //LOWER_CELSIUS     //TGT (>)           //TLT(<)            //R
+                    {0x04, 0x04, 0x04}, {0x08, 0x07, 0x05}, {0x11, 0x0A, 0x04}, {0x04, 0x0A, 0x11}, {0x1F, 0x16, 0x1D},
+                    //BLE1 symbol        //BLE2 symbol
+                    {0x04, 0x11, 0x0E}, {0x11, 0x0E, 0x00},
                     };
 
 uint8_t row_mapper[] = { 8,9,7,5,6,3,4,2,0,1 };
