@@ -162,7 +162,6 @@ class OTAStatusCallback : public BLECharacteristicCallbacks {
     } else if (status->statusCode == OTA_STATUS_REBOOT) {
       Serial.println("Reboot device...");
       otaStatus.statusCode = OTA_STATUS_REBOOT;
-      rebootCounter = 50;
     }
     Serial.print("Unknown command ");
     Serial.println(status->statusCode);
